@@ -8,8 +8,9 @@ using namespace std;
 string DecimalToBinary(int numero);
 int BinaryToDecimal(string binario);
 
-// int OctalToDecimal(string octal);
-// string DecimalToOctal(int decimal);
+// int OctalToDecimal(string octal); // Petronilo Bion
+// string DecimalToOctal(int decimal); // Petronilo Bion
+
 // int HexadecimalToDecimal(string hexa);
 // string DecimalToHexadecimal(int decimal);
 
