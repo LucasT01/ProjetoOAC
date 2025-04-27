@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <algorithm>
 
 using namespace std;
 
@@ -13,13 +14,11 @@ double DecimalToOctal(double decimal); // Petronilo Bion
 
 // int HexadecimalToDecimal(string hexa);
 // string DecimalToHexadecimal(int decimal);
-// string BinaryToOctal(string binary);
-// string BinaryToHexadecimal(string binary);
 
-//double Add(double numero1, double numero2, int base1, int base2);
-//double Subtract(double numero1, double numero2, int base1, int base2);
-//double Multiply(double numero1, double numero2, int base1, int base2);
-//double Divide(double numero1, double numero2, int base1, int base2);
+string Add(string num1, string num2);
+//string Subtract(string num1, string num2);
+//string Multiply(string num1, string num2);
+//string Divide(string num1, string num2);
 
 int main (){
  int opcao = 0;
@@ -84,7 +83,8 @@ int main (){
                 cout << "Opcao invalida!" << endl;
             }
         }
-        else if (opcao == 2) {
+        else if (opcao == 2) 
+	{
             int OpcaoOperacao = 0;
 		//Submenu de Operações.
             cout << "\n=== MENU DE OPERACOES ===" << endl;
@@ -95,31 +95,80 @@ int main (){
             cout << "Escolha uma opcao: ";
             cin >> OpcaoOperacao;
 
-            //cout << "Digite o primeiro numero: ";
-            // cout << "Escolha a base do primeiro numero: "; << endl;
-	    //cout << 1 - binario, 2 - octal, 3 - decimal, 4 - hexadecimal " << endl;
-            // cin >> base1;
-            // cout << "Digite o primeiro numero: ";
-            // cin >> numero1;
+            cout << "Escolha a base do primeiro numero (digite um numero do 1 ao 4): " << endl;
+	    cout << "1 - binario, 2 - octal, 3 - decimal, 4 - hexadecimal " << endl;  
+             int base1;
+             cin >> base1;
+            cout << "Digite o primeiro numero: ";
+	    int numero1;
+            cin >> numero1;
 
-            // cout << "Escolha a base do segundo numero: ";
-            //cout << 1 - binario, 2 - octal, 3 - decimal, 4 - hexadecimal " << endl;
-            // cin >> base2;
-            // cout << "Digite o segundo numero: ";
-            // cin >> numero2;
+            cout << "Escolha a base do segundo numero (digite um numero do 1 ao 4): ";
+            cout << "1 - binario, 2 - octal, 3 - decimal, 4 - hexadecimal " << endl;
+	     int base2;
+             cin >> base2;
+             cout << "Digite o segundo numero: ";
+	     int numero2;
+             cin >> numero2;
 
-	    //AQUI IMPLEMENTAR A CONVERSÃO DE NUMERO1 E NUMERO2 ANTES DAS OPERAÇÕES.
+	     cout << "Escolha a base que voce quer para o resultado (digite um numero do 1 ao 4): " << endl;
+	    cout << "1 - binario, 2 - octal, 3 - decimal, 4 - hexadecimal " << endl;  
+             int base3;
+             cin >> base3;
 
-            // if (OpcaoOperacao == 1) Add(numero1, numero2, base1, base2);
+	    //Abaixo a conversão dos números para binário antes daa operações:
+
+	    string binario1, binario2;
+
+            if (base1 == 1) binario1 = to_string((int)numero1); // Se já é binário, converte pra string.
+            else if (base1 == 2) binario1 = DecimalToBinary(OctalToDecimal(numero1)); // Octal -> Decimal -> Binário
+            else if (base1 == 3) binario1 = DecimalToBinary(numero1); // Decimal -> Binário
+            // else if (base1 == 4) binario1 = DecimalToBinary(HexadecimalToDecimal(numero1)); // Hexadecimal -> Decimal -> Binário.
+            // (Essa função ainda não foi implementada)
+
+
+            if (base2 == 1) binario2 = to_string((int)numero2);
+            else if (base2 == 2) binario2 = DecimalToBinary(OctalToDecimal(numero2));
+            else if (base2 == 3) binario2 = DecimalToBinary(numero2);
+            // else if (base2 == 4) binario2 = DecimalToBinary(HexadecimalToDecimal(numero2));
+
+	    //(EM CADA UMA DAS OPERAÇÕES ABAIXO, REALIZAR A CONVERSÃO DE VOLTA À BASE ORIGINAL (base3) FORNECIDA PELO USUÁRIO)
 		
-            // if (OpcaoOperacao == 2) Subtract(numero1, numero2, base1, base2);
+             if (OpcaoOperacao == 1){
+		     
+		    string soma = Add(binario1, binario2);
+		     
+		      if (base3 == 1)
+		      {
+		      cout << "Soma: " << soma << endl;
+		      }
+                      else if (base3 == 2)
+		      {
 
-	    // if (OpcaoOperacao == 3) Multiply(numero1, numero2, base1, base2);
+			       cout << "Soma: " << DecimalToOctal(BinaryToDecimal(soma)) << endl;
+		      }
+                      else if (base3 == 3)
+		      {
+                               cout << "Soma: " << BinaryToDecimal(soma) << endl;
+			      
+		      }
+		     
+                      // else if (base3 == 4){
+		     //cout << "A soma é: " <<  DecimalToHexadecimal(BinaryToDecimal(soma)) << endl; // Hexadecimal <- Decimal <- Binário.}
+                      // (Essa função ainda não foi implementada)
+		     
+	     }
 
-	    // if (OpcaoOperacao == 4) Divide(numero1, numero2, base1, base2);
+            // if (OpcaoOperacao == 2) Subtract(binario1, binario2);
 
-            cout << "Operacoes ainda serao implementadas" << endl;
+	    // if (OpcaoOperacao == 3) Multiply(binario1, binario2);
+
+	    // if (OpcaoOperacao == 4) Divide(binario1, binario2);
+
+
+            cout << "Demais operacoes ainda serao implementadas" << endl;
         }
+		
         else if (opcao == 0) {
             cout << "Saindo do programa..." << endl;
             break; 
@@ -249,3 +298,151 @@ double DecimalToOctal(double decimal) {
 
     return octal;
 }
+
+
+// int HexadecimalToDecimal(string hexa){
+
+
+
+
+
+
+
+// string DecimalToHexadecimal(int decimal){
+
+
+
+
+
+
+
+
+//Função que adiciona dois núemros binários:
+string Add(string numA, string numB){
+	
+ // Encontra o ponto nas duas strings.
+    size_t pontoA = numA.find('.');
+    size_t pontoB = numB.find('.');
+
+    // Separa a parte inteira da parte fracionária.
+    string inteiraA, fracA;
+    if (pontoA != string::npos) {
+        inteiraA = numA.substr(0, pontoA);
+        fracA = numA.substr(pontoA + 1);
+    } else {
+        inteiraA = numA;
+        fracA = "";
+    }
+
+    string inteiraB, fracB;
+    if (pontoB != string::npos) {
+        inteiraB = numB.substr(0, pontoB);
+        fracB = numB.substr(pontoB + 1);
+    } else {
+        inteiraB = numB;
+        fracB = "";
+    }
+
+    // Iguala o tamanho das partes fracionárias
+    while (fracA.size() < fracB.size()) fracA += '0';
+    while (fracB.size() < fracA.size()) fracB += '0';
+
+    // Iguala o tamanho das partes inteiras
+    while (inteiraA.size() < inteiraB.size()) inteiraA = '0' + inteiraA;
+    while (inteiraB.size() < inteiraA.size()) inteiraB = '0' + inteiraB;
+
+    string ResultadoFrac = "";
+    int carry = 0;
+
+    // Soma parte fracionária da direita para a esquerda.
+    for (int i = fracA.size() - 1; i >= 0; i--) {
+        int bitA = fracA[i] - '0';
+        int bitB = fracB[i] - '0';
+        int soma = bitA + bitB + carry;
+        ResultadoFrac += (soma % 2) + '0';
+        carry = soma / 2;
+    }
+    reverse(ResultadoFrac.begin(), ResultadoFrac.end()); //Inverte a ordem.
+
+    string  ResultadoInt = "";
+
+    // Soma parte inteira da direita para a esquerda.
+    for (int i = inteiraA.size() - 1; i >= 0; i--) {
+        int bitA = inteiraA[i] - '0';
+        int bitB = inteiraB[i] - '0';
+        int soma = bitA + bitB + carry;
+         ResultadoInt += (soma % 2) + '0';
+        carry = soma / 2;
+    }
+
+    if (carry != 0) {
+        ResultadoInt += '1'; // Se sobrou carry, acrescenta no final
+    }
+
+    reverse(ResultadoInt.begin(), ResultadoInt.end());
+
+    // Monta o resultado final.
+    if (ResultadoFrac.empty()) {
+        return ResultadoInt;
+    } else {
+        return ResultadoInt + "." + ResultadoFrac;
+    }
+}
+
+
+
+
+
+
+
+	
+//string Subtract(string num1, string num2){
+
+
+
+
+
+
+
+
+
+
+//string Multiply(string num1, string num2){
+
+
+
+
+
+
+
+
+
+//string Divide(string num1, string num2){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
