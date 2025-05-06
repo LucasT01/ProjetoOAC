@@ -130,3 +130,19 @@ Todos os métodos recebem **números binários** como `std::string` e retornam o
 * A precisão para operações com frações é limitada conforme o projeto define (tipicamente até 4 casas decimais).
 
 ---
+
+## Alternativa com HTML
+
+O projeto também possui uma alternativa de interface gráfica utilizando e adaptando todo o código-fonte ao funcionamento com HTML.
+Código-fonte: **calculator.html**
+
+---
+
+
+
+
+
+
+
+
+
