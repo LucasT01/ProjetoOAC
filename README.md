@@ -13,7 +13,22 @@ O projeto possui uma interface gráfica desenvolvida com **Qt Creator**, e toda 
 
 ---
 
-## Estrutura do Projeto
+## Estrutura do Projeto 
+
+**Numbering Simulator**
+
+O projeto possui um arquivo produzido de código-fonte em c++ que serviu de base fundamental para todo o projeto, adaptado posteriormente ao qt creator
+e a orientação a objetos, bem como para uma segunda alternativa de interface gráfica do projeto com HTML.
+
+O código-fonte trata-se do **NumberingSimulator.cpp**, que isoladamente já funciona apenas o compilando unicamente no terminal com um compilador GCC, sem
+a interface gráfica. Nele há todas as funções de conversão, operação, funções auxiliares e todo o menu integrado. 
+Todas as operações numéricas são feitas entre números binários, com o usuário podendo submeter dois números (incluindo números fracionados)
+em qualquer base (2,8,10,16), assim como escolher a base da resposta.
+
+
+---
+
+## Estrutura do Projeto - com Qt 
 
 O projeto é organizado da seguinte forma:
 
